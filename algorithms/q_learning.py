@@ -5,14 +5,41 @@ from environment.warehouse_env import WarehouseEnv
 # from utils.visualize import plot_maze
 from utils.animate import save_animation
 
-DEFAULT_GRID = [
-    list("S.......X."),   # 10
-    list(".XX.X....X"),   # padded to 10
-    list(".....XX..."),   # padded to 10
-    list(".X......DX"),   # padded to 10 
-    list(".X.XXX...."),   # padded to 10
+# DEFAULT_GRID = [
+#     list("S.......X."),   # 10
+#     list(".XX.X....X"),   # padded to 10
+#     list(".....XX..."),   # padded to 10
+#     list(".X......DX"),   # padded to 10 
+#     list(".X.XXX...."),   # padded to 10
+# ]
+# original raw rows (may vary in length)
+RAW_GRID = [
+    "S....X...X.......X",
+    ".XX..XX.....XX...X",
+    "..X.......X....X..",
+    "X....X..XX...X..X",
+    "...XX....X.....XX",
+    "..X..X...X.X...X.",
+    ".X....XX....X.X..",
+    "X...X...X...X....X",
+    "..XX....XX....X..",
+    "...X..X....X..XX.",
+    "X...X...XX...X...",
+    "..X....X..X...X..",
+    ".X..X...X....X..XX",
+    "X....X...XX...X..",
+    "..X...X....X...XX",
+    "...XX...X..X....X",
+    ".X....X..X....X..D",
+    "..X..XX....X..XX.",
+    "X....X...X....X..X",
+    "..X....X...X....X",
 ]
 
+# pad all rows to length 20
+DEFAULT_GRID = [list(row.ljust(20, '.')) for row in RAW_GRID]
+
+# now each row is exactly 20 elements
 
 def train_q_learning(grid=DEFAULT_GRID, episodes=2000, alpha=0.1, gamma=0.95, epsilon=0.2):
     env = WarehouseEnv(grid)
@@ -64,5 +91,5 @@ if __name__ == '__main__':
     env.render(path=path)
     print("Path:", path)
     # plot_maze(env.grid, path=path, show_numbers=True)
-    save_animation(env, path, filename="q_learning_robot1.gif")
+    save_animation(env, path, filename="q_learning_robot2.gif")
 
